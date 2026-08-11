@@ -1,24 +1,18 @@
-☕✨ BrewAI --- AI Coffee Shop Assistant
-
-<p align="center">
-
-<strong>{=html}🤖 AI-powered coffee experience for customers, cafés &modern digital commerce.</strong>{=html}
-
-</p>
-
-<p align="center">
-
-☕ AI Assistant • 🛒 Smart Ordering • 📊 Admin Analytics • 🗺️ NearbyCafés • 🔐 Secure RBAC
-
-</p>
-
 🌟 Overview
 
-BrewAI is a premium full-stack AI-powered Coffee Shop Assistant &SaaS platform that combines conversational AI, personalized coffeediscovery, online ordering, customer engagement, business analytics andsecure administrator workflows.
+BrewAI is a full-stack AI-powered Coffee Shop Assistant and SaaSplatform combining conversational AI, personalized coffee discovery,online ordering, customer engagement, business analytics, and secureadministrator workflows.
 
-It is more than a static coffee-shop website:
+What BrewAI Combines
 
-🤖 Generative AI + ☕ Coffee Commerce + 📊 BusinessAnalytics + 🔐 Role-Based Security + 🗺️ Location Services
+🤖 Generative AI
+
+☕ Coffee Commerce
+
+📊 Business Analytics
+
+🔐 Role-Based Security
+
+🗺️ Location Services
 
 🚀 Core Features
 
@@ -68,11 +62,11 @@ It is more than a static coffee-shop website:
 
 🔐 Protected administrator APIs
 
-🧠 AI Layer
+🤖 AI Layer
 
 BrewAI integrates Google Gemini for its conversational AIexperience.
 
-🤖 AI Use Cases
+AI Use Cases
 
 💬 Natural-language conversations
 
@@ -84,15 +78,13 @@ BrewAI integrates Google Gemini for its conversational AIexperience.
 
 ❤️ Preference-aware experiences
 
-Example:
+Example
 
-👤 Customer:
-"I want something cold and not too sweet."
+Customer:> I want something cold and not too sweet.
 
-🤖 BrewAI:
-"Here are some refreshing options that match your preference..."
+BrewAI:> Here are some refreshing options that match your preference...
 
-🏗️ Architecture
+🏗️ System Architecture
 
                          ☕ BREWAI
                             │
@@ -100,42 +92,43 @@ Example:
               │                           │
         👤 CUSTOMER                    👑 ADMIN
               │                           │
-      ┌───────┼────────┐          ┌───────┼────────┐
-      │       │        │          │       │        │
-    Menu     AI      Orders     Analytics Orders  Menu
-      │       │        │          │       │        │
-      └───────┼────────┘          └───────┼────────┘
+       ┌──────┼───────┐            ┌──────┼───────┐
+       │      │       │            │      │       │
+      Menu    AI    Orders      Analytics Orders  Menu
+       │      │       │            │      │       │
+       └──────┼───────┘            └──────┼───────┘
               │                           │
-              └──────────┬────────────────┘
-                         │
-                  🔐 Authentication
-                         │
-                    REST / API Layer
-                         │
-              ┌──────────┴──────────┐
-              │                     │
-        🤖 Gemini AI          🗺️ Google Maps
-              │                     │
-              └──────────┬──────────┘
-                         │
-                  💾 Application Data
+              └─────────────┬─────────────┘
+                            │
+                   🔐 Authentication
+                            │
+                      REST / API Layer
+                            │
+                 ┌──────────┴──────────┐
+                 │                     │
+           🤖 Gemini AI          🗺️ Google Maps
+                 │                     │
+                 └──────────┬──────────┘
+                            │
+                     💾 Application Data
 
 💻 Technology Stack
 
-Layer          Technology                 Purpose
+Layer          Technology                     Purpose
 
-🎨 Frontend    Next.js                    Web application framework⚛️ UI          React                      Component-based interface📘 Language    TypeScript                 Type safety⚙️ Backend     Python                     Application/API logic🔌 APIs        REST APIs                  Frontend/backend communication🤖 AI          Google Gemini              Conversational AI🗺️ Location    Google Maps Platform       Nearby cafés🔐 Security    Authentication + RBAC      Customer/admin separation📊 Analytics   Dashboard visualizations   Business insights
+🎨 Frontend    Next.js                    Web application framework⚛️ UI          React                      Component-based interface📘 Language    TypeScript                 Type safety⚙️ Backend     Python                     Application / API logic🔌 APIs        REST APIs                  Frontend/backend communication🤖 AI          Google Gemini              Conversational AI🗺️ Location    Google Maps Platform       Nearby cafés🔐 Security    Authentication + RBAC      Customer/admin separation📊 Analytics   Dashboard visualizations   Business insights
 
-⚠️ Exact package versions should be taken from the project's currentpackage.json / Python dependency file.
+Note: Exact package versions should be taken from the project'scurrent package.json and Python dependency file.
 
 🔐 Authentication & RBAC
 
 BrewAI separates users into two protected roles:
 
 👤 CUSTOMER
+
 👑 ADMIN
 
-Customer
+👤 Customer Flow
 
 Register
    ↓
@@ -145,7 +138,7 @@ Login
    ↓
 /dashboard
 
-Admin
+👑 Admin Flow
 
 Select Admin
    ↓
@@ -159,23 +152,9 @@ role = admin
 
 🛡️ Security Boundaries
 
-👤 Customer → /admin/dashboard
-             ↓
-           🚫 Blocked
+Scenario                           Expected
 
-👤 Customer → Admin API
-             ↓
-           🚫 403
-
-👑 Admin → Admin API
-             ↓
-           ✅ 200
-
-🧪 Forged role/cookie
-             ↓
-           🚫 No escalation
-
-The project also verifies invalid admin secrets, protected APIs, invalidsessions and logout/session clearing.
+👤 Customer → /admin/dashboard   🚫 Blocked👤 Customer → Admin API            🚫 403👑 Admin → Admin API               ✅ 200🧪 Forged role/cookie              🚫 No escalation🔑 Invalid admin secret            🚫 Rejected🍪 Invalid session                 🚫 Rejected🚪 Logout                          ✅ Session cleared
 
 🗺️ Nearby Cafés
 
@@ -189,7 +168,7 @@ BrewAI includes location-based café discovery using Google MapsPlatform.
         ↓
 👤 Customer Discovery
 
-Environment variable:
+Environment Variable
 
 NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_key
 
@@ -219,7 +198,7 @@ The administrator dashboard turns order activity into business insights.
 
 👥 Customer Statistics
 
-This makes BrewAI relevant to both SaaS product engineering andbusiness analytics.
+This makes BrewAI relevant to SaaS product engineering andbusiness analytics.
 
 📦 Order Workflow
 
@@ -233,9 +212,7 @@ This makes BrewAI relevant to both SaaS product engineering andbusiness analytic
    ↓
 🔄 Status Updates
 
-Admin can update order states while the customer receives the lateststatus.
-
-Typical workflow:
+Order Status
 
 🟡 Pending
    ↓
@@ -251,7 +228,7 @@ BrewAI follows a premium coffee-inspired SaaS design system:
 
 🌑 Dark interface
 
-🟠 Warm coffee/amber accents
+🟠 Warm coffee / amber accents
 
 🧊 Modern cards
 
@@ -288,7 +265,7 @@ BrewAI follows a premium coffee-inspired SaaS design system:
         ├── Customers
         └── Settings
 
-Representative backend modules include:
+Backend Structure
 
 backend/
 ├── routers/
@@ -301,8 +278,6 @@ backend/
 
 🔑 Environment Configuration
 
-Example local configuration:
-
 # 🤖 AI
 GEMINI_API_KEY=your_gemini_api_key
 
@@ -312,12 +287,20 @@ NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_api_key
 # 🔐 Admin
 ADMIN_SECRET_KEY=your_private_admin_secret
 
-🚨 Never commit secrets
+🚨 Security
+
+Never commit secrets to GitHub.
+
+Do not expose:
 
 ❌ API keys
+
 ❌ Admin secret
+
 ❌ Passwords
+
 ❌ Private tokens
+
 ❌ Production credentials
 
 Keep local secrets in .env / .env.local and ensure they are ignoredby Git.
@@ -329,15 +312,15 @@ Keep local secrets in .env / .env.local and ensure they are ignoredby Git.
 git clone <your-repository-url>
 cd coffee-shop-ai-agent
 
-2️⃣ Install frontend dependencies
+2️⃣ Install Frontend Dependencies
 
 npm install
 
-3️⃣ Configure environment variables
+3️⃣ Configure Environment
 
 Create the required local .env file.
 
-4️⃣ Start frontend
+4️⃣ Start Frontend
 
 npm run dev
 
@@ -345,21 +328,19 @@ Frontend:
 
 http://localhost:3000
 
-5️⃣ Start backend
+5️⃣ Start Backend
 
-Start the Python API using the server command configured in yourproject.
+Start the Python API using the server command configured in the project.
 
-Backend development server:
+Backend:
 
 http://localhost:8000
 
-💡 Use the exact backend command from your current projectconfiguration rather than copying a generic command.
+Use the exact backend command from the current project configurationrather than copying a generic command.
 
 🧪 Verification & Security Testing
 
-The project has been tested around both normal flows and authorizationboundaries.
-
-Scenario                        Expected
+Scenario                        Expected Result
 
 👤 Customer registration        ✅ Customer role👤 Customer login               ✅ /dashboard🚫 Customer → Admin dashboard   🚫 Blocked🔑 Wrong admin secret           🚫 Rejected👑 Correct admin credentials    ✅ Admin access👑 Admin → Admin API            ✅ Allowed👤 Customer → Admin API         🚫 403🧪 Forged role                  🚫 No escalation🍪 Invalid cookie/session       🚫 Rejected🚪 Logout                       ✅ Session cleared
 
@@ -489,18 +470,15 @@ Role-specific UX
 
 BrewAI --- AI-Powered Coffee Shop Assistant
 
-Built a full-stack AI-powered coffee commerce SaaS platform withseparate customer and administrator experiences. Integrated Gemini forconversational AI, Google Maps for nearby café discovery, securerole-based authentication, online ordering, order tracking andbusiness analytics. Developed protected administrator APIs andauthorization controls to prevent unauthorized role escalation whiledelivering a responsive premium dashboard experience.
+Built a full-stack AI-powered coffee commerce SaaS platform withseparate customer and administrator experiences. Integrated Gemini forconversational AI, Google Maps for nearby café discovery, securerole-based authentication, online ordering, order tracking, and businessanalytics. Developed protected administrator APIs and authorizationcontrols to prevent unauthorized role escalation while delivering aresponsive premium dashboard experience.
 
-🧰 Tech Stack
+🧰 Tech Stack Summary
 
-Next.js • React • TypeScript • Python
-REST APIs • Gemini API • Google Maps API
-Authentication • RBAC • Analytics
-Responsive UI • SaaS Architecture
+Frontend: Next.js • React • TypeScriptBackend: Python • REST APIsAI: Google Gemini APILocation: Google Maps APISecurity: Authentication • RBAC • Protected APIsProduct: Analytics • Responsive UI • SaaS Architecture
 
 🌟 Why BrewAI?
 
-A traditional café website:
+Traditional Café Website
 
 🌐 Website
    ↓
@@ -508,35 +486,23 @@ A traditional café website:
    ↓
 📞 Contact
 
-BrewAI:
+BrewAI
 
-                    ☕ BREWAI
-                       │
-        ┌──────────────┼──────────────┐
-        ↓              ↓              ↓
-      🤖 AI          🛒 Orders      📊 Analytics
-        │              │              │
-        ↓              ↓              ↓
-  Personalization   Customers      Business
-        │              │              │
-        └──────────────┼──────────────┘
-                       ↓
-                 🔐 Secure SaaS
+                         ☕ BREWAI
+                            │
+             ┌──────────────┼──────────────┐
+             ↓              ↓              ↓
+           🤖 AI          🛒 Orders      📊 Analytics
+             │              │              │
+             ↓              ↓              ↓
+      Personalization   Customers      Business
+             │              │              │
+             └──────────────┼──────────────┘
+                            ↓
+                       🔐 Secure SaaS
 
 👩‍💻 Author
 
 Riya Singh
 
 🚀 AI / Data / Full-Stack Enthusiast☕ Creator of BrewAI
-
-<p align="center">
-
-<strong>{=html}☕ Brew smarter. Live better. 🤖</strong>{=html}
-
-</p>
-
-<p align="center">
-
-⭐ Built with curiosity, creativity & code.
-
-</p>
