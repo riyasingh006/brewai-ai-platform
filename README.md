@@ -114,3 +114,302 @@ BrewAI integrates **Google Gemini** to provide conversational AI capabilities.
                             │
                      💾 Application Data
 
+---
+
+## 🛠️ Technology Stack
+
+| Layer | Technology | Purpose |
+|---|---|---|
+| 🎨 Frontend | **Next.js** | Web application framework |
+| ⚛️ UI | **React** | Component-based interface |
+| 📘 Language | **TypeScript** | Type-safe development |
+| ⚙️ Backend | **Python** | API and application logic |
+| 🔌 APIs | **REST APIs** | Frontend/backend communication |
+| 🤖 AI | **Google Gemini** | Conversational AI |
+| 🗺️ Location | **Google Maps Platform** | Nearby café discovery |
+| 🔐 Security | **Authentication + RBAC** | Customer/admin access control |
+| 📊 Analytics | **Dashboard Visualizations** | Business insights |
+
+---
+
+##🔐 Authentication & Role-Based Access Control
+
+BrewAI separates users into two protected roles:
+
+👤 CUSTOMER
+👑 ADMIN
+
+#👤 Customer Authentication Flow
+Register
+   ↓
+Customer Role
+   ↓
+Login
+   ↓
+Customer Dashboard
+
+#👑 Admin Authentication Flow
+Admin Login
+   ↓
+Email + Password
+   ↓
+ADMIN_SECRET_KEY Verification
+   ↓
+Admin Role
+   ↓
+Admin Dashboard
+
+---
+
+##🛡️ Security Boundaries
+Scenario	Expected Result
+👤 Customer → /admin/dashboard	🚫 Blocked
+👤 Customer → Admin API	🚫 403
+👑 Admin → Admin API	✅ Allowed
+🔑 Invalid admin secret	🚫 Rejected
+🍪 Invalid session	🚫 Rejected
+🧪 Forged role/cookie	🚫 No privilege escalation
+🚪 Logout	✅ Session cleared
+
+---
+
+##🗺️ Nearby Café Discovery
+
+BrewAI includes location-based café discovery using Google Maps Platform.
+
+📍 Customer Location
+        ↓
+🗺️ Google Maps
+        ↓
+☕ Nearby Cafés
+        ↓
+👤 Customer Discovery
+
+#Environment Variable
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_key
+
+---
+
+##📊 Admin Analytics
+
+The administrator dashboard converts coffee-shop activity into useful business insights.
+
+#📈 Key Performance Indicators
+💰 Total Revenue
+🛒 Total Orders
+👥 Total Customers
+💵 Average Order Value
+
+#📊 Analytics
+📈 Revenue Overview
+🏆 Top Selling Items
+🕐 Orders by Time
+🔄 Order Status
+👥 Customer Statistics
+📦 Product Performance
+
+#📦 Order Workflow
+☕ Menu
+   ↓
+🛒 Cart
+   ↓
+🧾 Order
+   ↓
+📦 Order Tracking
+   ↓
+🔄 Status Updates
+
+#Order Status
+🟡 Pending
+   ↓
+🔵 Confirmed
+   ↓
+🟠 Preparing
+   ↓
+🟢 Completed
+
+
+##🧭 Application Structure
+/
+├── /auth
+│
+├── /dashboard
+│   ├── Customer Dashboard
+│   ├── Chat
+│   ├── Menu
+│   ├── Orders
+│   ├── Profile
+│   └── Nearby Cafés
+│
+└── /admin
+    └── /dashboard
+        ├── Dashboard
+        ├── Orders
+        ├── Menu Manager
+        ├── Customers
+        └── Settings
+
+
+##📁 Project Structure
+coffee-shop-ai-agent/
+│
+├── app/
+│
+├── backend/
+│   ├── routers/
+│   │   └── auth.py
+│   │
+│   ├── services/
+│   │   └── auth_service.py
+│   │
+│   └── ...
+│
+├── frontend/
+│
+├── data/
+│
+├── pictures/
+│
+├── .env.example
+├── .gitignore
+├── README.md
+├── requirements.txt
+└── VERIFICATION-REPORT.md
+
+##🔑 Environment Configuration
+
+Create a local .env file and configure the required credentials.
+
+# 🤖 Google Gemini
+GEMINI_API_KEY=your_gemini_api_key
+
+# 🗺️ Google Maps
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_api_key
+
+# 🔐 Administrator
+ADMIN_SECRET_KEY=your_private_admin_secret
+
+##🛠️ Local Development
+#1️⃣ Clone the Repository
+git clone <your-repository-url>
+cd coffee-shop-ai-agent
+
+#2️⃣ Install Dependencies
+npm install
+
+#3️⃣ Configure Environment
+
+Create the required .env file and add your API keys and secrets.
+
+#4️⃣ Start the Frontend
+npm run dev
+
+#Frontend:
+
+http://localhost:3000
+#5️⃣ Start the Backend
+
+Start the Python backend using the server configuration included in the project.
+
+#Backend:
+
+http://localhost:8000
+
+Use the exact backend command configured in your project.
+
+##🧪 Verification & Security Testing
+
+The application should verify the following scenarios:
+
+#Test	Expected Result
+👤 Customer registration	✅ Customer role
+👤 Customer login	✅ Customer dashboard
+👑 Admin authentication	✅ Admin role
+🔑 Wrong admin secret	🚫 Rejected
+🚫 Customer → Admin dashboard	🚫 Blocked
+👑 Admin → Admin API	✅ Allowed
+👤 Customer → Admin API	🚫 403
+🧪 Forged role	🚫 No privilege escalation
+🍪 Invalid session	🚫 Rejected
+🚪 Logout	✅ Session cleared
+
+
+##📚 What This Project Demonstrates
+#💻 Full-Stack Development
+React
+Next.js
+TypeScript
+Python
+REST APIs
+Responsive UI
+Component architecture
+Frontend/backend integration
+
+#🤖 AI / Generative AI
+Google Gemini API integration
+Conversational AI
+AI-powered recommendations
+Prompt-based workflows
+AI-assisted user experiences
+
+#🔐 Security
+Authentication
+Authorization
+Role-Based Access Control
+Protected routes
+Protected APIs
+Secret management
+Session validation
+Privilege-escalation prevention
+
+#📊 Analytics
+KPI design
+Revenue analytics
+Order analytics
+Customer analytics
+Product performance analysis
+
+#🧠 Product Engineering
+Customer journey design
+Admin workflows
+SaaS architecture
+Real-world business requirements
+Role-specific interfaces
+Dashboard design
+
+
+##🛣️ Future Roadmap
+#🤖 AI
+🧠 Long-term preference memory
+🎯 Advanced recommendation engine
+🗣️ Voice ordering
+🔊 AI voice responses
+🌐 Multi-language assistant
+🌦️ Weather-aware recommendations
+
+#💳 Commerce
+💳 Payment gateway
+🧾 Automatic PDF receipts
+🎟️ Coupons
+💰 Wallet / credits
+🚚 Delivery tracking
+
+#🏪 Marketplace
+🏬 Multiple cafés
+🧑‍🍳 Café onboarding
+📋 Restaurant dashboards
+🚚 Delivery-fee management
+💼 Platform commission
+🗺️ Multi-café discovery
+
+#📊 Advanced Analytics
+🔮 Demand forecasting
+📦 Inventory analytics
+🧠 Customer segmentation
+📈 Predictive sales analytics
+
+##👩‍💻 Author
+Riya Singh
+
+🚀 AI / Data / Full-Stack Enthusiast
+☕ Creator of BrewAI
