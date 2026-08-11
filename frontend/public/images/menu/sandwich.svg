@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="44%" r="64%">
+      <stop offset="0%" stop-color="#241910"/>
+      <stop offset="48%" stop-color="#14100a"/>
+      <stop offset="100%" stop-color="#0b0a0c"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="45%" r="48%">
+      <stop offset="0%" stop-color="#d89b5c" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#d89b5c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bread" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d9a961"/>
+      <stop offset="60%" stop-color="#b5813e"/>
+      <stop offset="100%" stop-color="#8a5a24"/>
+    </linearGradient>
+    <linearGradient id="veggie" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6f9e4c"/>
+      <stop offset="100%" stop-color="#3f6728"/>
+    </linearGradient>
+    <linearGradient id="plate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a4138"/>
+      <stop offset="100%" stop-color="#1a1715"/>
+    </linearGradient>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <ellipse cx="200" cy="180" rx="150" ry="150" fill="url(#glow)"/>
+
+  <ellipse cx="200" cy="290" rx="112" ry="20" fill="#000" opacity="0.55" filter="url(#soft)"/>
+  <ellipse cx="200" cy="286" rx="110" ry="19" fill="url(#plate)"/>
+  <ellipse cx="200" cy="284" rx="90" ry="15" fill="#262220"/>
+
+  <g>
+    <path d="M128 236 L272 248 L248 132 Z" fill="url(#bread)"/>
+    <path d="M128 236 L272 248 L248 132 Z" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="2.5"/>
+    <path d="M132 226 L146 222 L140 176 Z" fill="url(#bread)"/>
+    <path d="M138 214 L248 224 L242 178 Z" fill="#c9934a"/>
+    <path d="M140 214 L246 224 L240 180 Z" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="2"/>
+  </g>
+
+  <path d="M144 196 L240 205 L234 176 Z" fill="url(#veggie)"/>
+  <path d="M146 188 L238 197 L234 172 Z" fill="#c8a25e"/>
+  <path d="M150 182 L232 190 L228 170 Z" fill="url(#bread)"/>
+
+  <path d="M146 222 L166 214 L163 176" stroke="#d8f0b0" stroke-width="3" fill="none" opacity="0.7" stroke-linecap="round"/>
+  <path d="M204 230 L222 222" stroke="#e0524a" stroke-width="4" stroke-linecap="round" opacity="0.85"/>
+
+  <circle cx="236" cy="166" r="2.6" fill="#d6b06a" opacity="0.9"/>
+  <circle cx="182" cy="168" r="2.2" fill="#d6b06a" opacity="0.7"/>
+  <circle cx="210" cy="158" r="2.2" fill="#d6b06a" opacity="0.7"/>
+
+  <path d="M132 236 L248 132 L268 244 Z" stroke="#000" stroke-width="8" opacity="0.14" fill="none" filter="url(#soft)"/>
+</svg>

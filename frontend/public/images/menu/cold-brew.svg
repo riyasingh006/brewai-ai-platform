@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="36%" r="72%">
+      <stop offset="0%" stop-color="#2a1e12"/>
+      <stop offset="45%" stop-color="#15100a"/>
+      <stop offset="100%" stop-color="#0b0a0c"/>
+    </radialGradient>
+    <radialGradient id="halo" cx="50%" cy="42%" r="46%">
+      <stop offset="0%" stop-color="#e0a25a" stop-opacity="0.32"/>
+      <stop offset="55%" stop-color="#c98642" stop-opacity="0.13"/>
+      <stop offset="100%" stop-color="#c98642" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="glass" x1="0.12" y1="0" x2="0.92" y2="0">
+      <stop offset="0%" stop-color="#5a4328" stop-opacity="0.95"/>
+      <stop offset="30%" stop-color="#2c1f12" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#1d140c" stop-opacity="0.92"/>
+      <stop offset="100%" stop-color="#3a2716" stop-opacity="0.96"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.0"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.0"/>
+    </linearGradient>
+    <linearGradient id="foam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#efdcb8"/>
+      <stop offset="100%" stop-color="#9a6a32"/>
+    </linearGradient>
+    <filter id="blur" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="16"/></filter>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.5"/></filter>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <ellipse cx="200" cy="180" rx="172" ry="152" fill="url(#halo)"/>
+
+  <ellipse cx="200" cy="302" rx="100" ry="19" fill="#000" opacity="0.62" filter="url(#blur)"/>
+  <ellipse cx="200" cy="298" rx="74" ry="11" fill="#000" opacity="0.55"/>
+
+  <path d="M150 118 L150 286 Q150 301 200 301 Q250 301 250 286 L250 118 Z" fill="url(#glass)"/>
+  <path d="M150 118 L150 286 Q150 301 200 301 Q250 301 250 286 L250 118 Z" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.8"/>
+  <path d="M152 124 L152 282 Q152 293 200 293 Q248 293 248 282 L248 124 Z" fill="url(#shine)" opacity="0.5"/>
+  <rect x="156" y="132" width="5" height="150" rx="2.5" fill="#ffffff" opacity="0.18"/>
+  <rect x="244" y="140" width="3.5" height="130" rx="1.75" fill="#ffffff" opacity="0.10"/>
+
+  <g>
+    <path d="M160 188 L160 204 L196 212 L196 196 Z" fill="#0d0805" opacity="0.95"/>
+    <path d="M204 176 L204 192 L238 200 L238 184 Z" fill="#0d0805" opacity="0.95"/>
+    <path d="M170 222 L170 236 L204 244 L204 230 Z" fill="#0d0805" opacity="0.9"/>
+    <path d="M216 216 L216 232 L248 240 L248 224 Z" fill="#0d0805" opacity="0.9"/>
+    <path d="M166 250 L166 264 L198 271 L198 257 Z" fill="#0d0805" opacity="0.85"/>
+    <path d="M220 248 L220 262 L248 268 L248 254 Z" fill="#0d0805" opacity="0.85"/>
+    <path d="M158 154 L158 168 L186 175 L186 161 Z" fill="#0d0805" opacity="0.9"/>
+    <path d="M196 148 L196 164 L222 170 L222 154 Z" fill="#0d0805" opacity="0.9"/>
+  </g>
+
+  <path d="M156 130 L156 270 Q157 284 200 284 Q243 284 244 270 L244 130" fill="#000" opacity="0.25" filter="url(#soft)"/>
+
+  <ellipse cx="200" cy="118" rx="50" ry="10" fill="url(#foam)"/>
+  <ellipse cx="200" cy="118" rx="50" ry="10" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+  <path d="M170 115 Q186 108 202 116 Q218 124 232 115" stroke="#fff7e6" stroke-width="2.4" fill="none" stroke-linecap="round" opacity="0.75"/>
+
+  <path d="M254 128 L290 114" stroke="#e3c9a0" stroke-width="7" stroke-linecap="round" opacity="0.6"/>
+  <path d="M290 114 L290 88" stroke="#e3c9a0" stroke-width="7" stroke-linecap="round" opacity="0.6"/>
+  <path d="M283 99 L297 99" stroke="#e3c9a0" stroke-width="7" stroke-linecap="round" opacity="0.6"/>
+
+  <g opacity="0.6" fill="#d9bd90">
+    <circle cx="240" cy="126" r="3.4"/>
+    <circle cx="250" cy="134" r="2.6" opacity="0.75"/>
+    <circle cx="246" cy="143" r="2" opacity="0.5"/>
+  </g>
+</svg>

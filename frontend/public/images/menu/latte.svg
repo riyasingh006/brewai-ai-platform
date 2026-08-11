@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="36%" r="72%">
+      <stop offset="0%" stop-color="#2e2013"/>
+      <stop offset="45%" stop-color="#171009"/>
+      <stop offset="100%" stop-color="#0b0a0c"/>
+    </radialGradient>
+    <radialGradient id="halo" cx="50%" cy="42%" r="46%">
+      <stop offset="0%" stop-color="#e0a25a" stop-opacity="0.36"/>
+      <stop offset="55%" stop-color="#c98642" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#c98642" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cup" x1="0.15" y1="0" x2="0.9" y2="1">
+      <stop offset="0%" stop-color="#5e4e42"/>
+      <stop offset="35%" stop-color="#3c322b"/>
+      <stop offset="70%" stop-color="#221d1a"/>
+      <stop offset="100%" stop-color="#131010"/>
+    </linearGradient>
+    <linearGradient id="rimLight" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="35%" stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="milktop" cx="42%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#fbf2de"/>
+      <stop offset="45%" stop-color="#e9d4ae"/>
+      <stop offset="75%" stop-color="#c69a5e"/>
+      <stop offset="100%" stop-color="#8a5a28"/>
+    </radialGradient>
+    <radialGradient id="heart" cx="50%" cy="50%" r="62%">
+      <stop offset="0%" stop-color="#8a4a20"/>
+      <stop offset="100%" stop-color="#4a2310"/>
+    </radialGradient>
+    <filter id="blur" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="16"/></filter>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="3"/></filter>
+    <filter id="steam" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.6"/></filter>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <ellipse cx="200" cy="182" rx="175" ry="155" fill="url(#halo)"/>
+
+  <g opacity="0.5" filter="url(#steam)">
+    <path d="M176 102 C172 84 184 76 177 60" stroke="#f4e8d2" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M203 104 C199 86 210 78 202 62" stroke="#f4e8d2" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/>
+    <path d="M229 101 C225 84 235 77 228 63" stroke="#f4e8d2" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.45"/>
+  </g>
+
+  <ellipse cx="200" cy="296" rx="110" ry="21" fill="#000" opacity="0.62" filter="url(#blur)"/>
+  <ellipse cx="200" cy="292" rx="80" ry="12.5" fill="#000" opacity="0.55"/>
+
+  <ellipse cx="200" cy="288" rx="100" ry="18" fill="#1a1412"/>
+  <ellipse cx="200" cy="285" rx="100" ry="18" fill="url(#cup)"/>
+  <ellipse cx="200" cy="285" rx="100" ry="18" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="1.5"/>
+  <ellipse cx="200" cy="283" rx="74" ry="12.5" fill="#1d1816"/>
+  <path d="M122 276 Q200 259 278 276" stroke="url(#rimLight)" stroke-width="2.5" fill="none" opacity="0.7"/>
+  <path d="M256 284 Q294 287 301 280" stroke="#d89b5c" stroke-width="2" fill="none" opacity="0.5"/>
+
+  <path d="M128 154 L145 274 Q145 288 200 288 Q255 288 255 274 L272 154 Z" fill="url(#cup)"/>
+  <path d="M128 154 L145 274 Q145 288 200 288 Q255 288 255 274 L272 154 Z" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="1.5"/>
+  <path d="M143 180 Q147 213 149 242 Q151 265 158 274" stroke="#8a7262" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.35"/>
+  <path d="M145 194 Q147 217 148 235" stroke="#c9b29c" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M266 166 Q268 211 260 266" stroke="#e0a25a" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.55" filter="url(#soft)"/>
+
+  <ellipse cx="200" cy="154" rx="72" ry="15" fill="#3a3029"/>
+  <ellipse cx="200" cy="154" rx="72" ry="15" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  <path d="M135 152 Q151 142 169 148" stroke="rgba(255,255,255,0.5)" stroke-width="2" fill="none" opacity="0.6"/>
+
+  <ellipse cx="200" cy="154" rx="64" ry="13" fill="url(#milktop)"/>
+  <path d="M158 150 Q174 142 188 150 Q202 158 216 149 Q228 141 241 149" stroke="#c89a5e" stroke-width="2.6" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <path d="M200 160 L187 150 Q200 141 213 150 Z" fill="url(#heart)" opacity="0.95"/>
+  <path d="M200 160 Q192 153 200 147 Q208 153 200 160 Z" fill="#2f1709" opacity="0.8"/>
+  <path d="M166 156 Q182 148 196 156 Q210 164 224 155 Q235 147 243 154" stroke="#a9773c" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.4"/>
+
+  <path d="M142 214 L146 254 Q148 266 200 266 Q252 266 254 254 L258 214" fill="#000" opacity="0.22" filter="url(#soft)"/>
+</svg>

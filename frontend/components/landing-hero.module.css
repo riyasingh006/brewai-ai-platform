@@ -1,0 +1,105 @@
+/* Landing hero visual — scoped to the Home page only */
+
+@keyframes steam-rise {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0) scaleY(1) rotate(0deg);
+  }
+  25% {
+    opacity: 0.45;
+  }
+  60% {
+    opacity: 0.28;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(14px, -110px, 0) scaleY(1.7) rotate(4deg);
+  }
+}
+
+.steamLine {
+  position: absolute;
+  bottom: 0;
+  width: 2px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(238, 226, 210, 0.4) 45%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  filter: blur(0.6px);
+  transform-origin: bottom center;
+  animation: steam-rise 6s ease-out infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes bean-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(var(--bean-rot, 24deg));
+  }
+  50% {
+    transform: translate3d(6px, -14px, 0) rotate(calc(var(--bean-rot, 24deg) + 10deg));
+  }
+}
+
+.bean {
+  position: absolute;
+  width: 22px;
+  height: 13px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 32% 34%, #8a5a2b, #3f2510 72%);
+  box-shadow:
+    inset 0 -1px 2px rgba(0, 0, 0, 0.55),
+    inset 0 1px 1px rgba(255, 220, 170, 0.22),
+    0 6px 16px -6px rgba(0, 0, 0, 0.6);
+  animation: bean-float 9s ease-in-out infinite;
+  will-change: transform;
+  --bean-rot: 24deg;
+}
+
+.bean::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  transform: translateX(-50%);
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+@keyframes particle-drift {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translate3d(8px, -18px, 0);
+  }
+}
+
+.particle {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle,
+    rgba(240, 176, 104, 0.9) 0%,
+    rgba(227, 154, 69, 0.45) 45%,
+    rgba(227, 154, 69, 0) 72%
+  );
+  animation: particle-drift 7s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .steamLine,
+  .bean,
+  .particle {
+    animation: none;
+  }
+}
