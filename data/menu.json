@@ -1,0 +1,370 @@
+[
+  {
+    "id": 1,
+    "name": "Espresso",
+    "category": "Coffee",
+    "price": 3.5,
+    "description": "Rich, concentrated shot of our house espresso blend.",
+    "available": true
+  },
+  {
+    "id": 2,
+    "name": "Americano",
+    "category": "Coffee",
+    "price": 4.0,
+    "description": "Espresso pulled over hot water for a smooth cup.",
+    "available": true
+  },
+  {
+    "id": 3,
+    "name": "Cappuccino",
+    "category": "Coffee",
+    "price": 4.5,
+    "description": "Espresso with steamed milk and a thick layer of foam.",
+    "available": true
+  },
+  {
+    "id": 4,
+    "name": "Latte",
+    "category": "Coffee",
+    "price": 4.75,
+    "description": "Espresso with velvety steamed milk, lightly frothed.",
+    "available": true
+  },
+  {
+    "id": 5,
+    "name": "Flat White",
+    "category": "Coffee",
+    "price": 4.75,
+    "description": "Double ristretto with micro-foamed milk, silky and bold.",
+    "available": true
+  },
+  {
+    "id": 6,
+    "name": "Cortado",
+    "category": "Coffee",
+    "price": 4.25,
+    "description": "Equal parts espresso and warm milk for a balanced shot.",
+    "available": true
+  },
+  {
+    "id": 7,
+    "name": "Earl Grey",
+    "category": "Tea",
+    "price": 4.0,
+    "description": "Classic black tea with bergamot; lemon on request.",
+    "available": true
+  },
+  {
+    "id": 8,
+    "name": "Green Tea",
+    "category": "Tea",
+    "price": 3.75,
+    "description": "Delicate steamed green tea with a clean finish.",
+    "available": true
+  },
+  {
+    "id": 9,
+    "name": "Chai Latte",
+    "category": "Tea",
+    "price": 4.5,
+    "description": "Spiced black tea with steamed milk, sweet and aromatic.",
+    "available": true
+  },
+  {
+    "id": 10,
+    "name": "Matcha Latte",
+    "category": "Tea",
+    "price": 5.0,
+    "description": "Ceremonial-grade matcha whisked into steamed milk.",
+    "available": true
+  },
+  {
+    "id": 11,
+    "name": "Peppermint Tea",
+    "category": "Tea",
+    "price": 3.5,
+    "description": "Cooling, caffeine-free herbal infusion.",
+    "available": false
+  },
+  {
+    "id": 12,
+    "name": "Jasmine Tea",
+    "category": "Tea",
+    "price": 3.75,
+    "description": "Fragrant jasmine-scented green tea.",
+    "available": true
+  },
+  {
+    "id": 13,
+    "name": "Iced Americano",
+    "category": "Cold Coffee",
+    "price": 4.25,
+    "description": "Espresso chilled over ice, crisp and refreshing.",
+    "available": true
+  },
+  {
+    "id": 14,
+    "name": "Iced Latte",
+    "category": "Cold Coffee",
+    "price": 4.75,
+    "description": "Espresso and cold milk poured over ice.",
+    "available": true
+  },
+  {
+    "id": 15,
+    "name": "Cold Brew",
+    "category": "Cold Coffee",
+    "price": 5.0,
+    "description": "Steeped for 18 hours for a smooth, low-acid brew.",
+    "available": true
+  },
+  {
+    "id": 16,
+    "name": "Nitro Cold Brew",
+    "category": "Cold Coffee",
+    "price": 5.75,
+    "description": "Cold brew infused with nitrogen, creamy and cascading.",
+    "available": true
+  },
+  {
+    "id": 17,
+    "name": "Mocha Frappe",
+    "category": "Frappes",
+    "price": 5.75,
+    "description": "Blended chocolate, espresso, milk and ice, topped with cream.",
+    "available": true
+  },
+  {
+    "id": 18,
+    "name": "Caramel Frappe",
+    "category": "Frappes",
+    "price": 5.75,
+    "description": "Creamy caramel blended with milk and ice.",
+    "available": true
+  },
+  {
+    "id": 19,
+    "name": "Java Chip Frappe",
+    "category": "Frappes",
+    "price": 6.0,
+    "description": "Mocha frappe loaded with chocolate chips.",
+    "available": true
+  },
+  {
+    "id": 20,
+    "name": "Vanilla Bean Frappe",
+    "category": "Frappes",
+    "price": 5.5,
+    "description": "Sweet vanilla bean blended with milk and ice.",
+    "available": true
+  },
+  {
+    "id": 21,
+    "name": "Mango Dragonfruit Refresher",
+    "category": "Refreshers",
+    "price": 5.25,
+    "description": "Mango and dragonfruit shaken with green coffee extract.",
+    "available": true
+  },
+  {
+    "id": 22,
+    "name": "Strawberry Acai Refresher",
+    "category": "Refreshers",
+    "price": 5.25,
+    "description": "Sweet strawberry acai shaken over ice.",
+    "available": true
+  },
+  {
+    "id": 23,
+    "name": "Passion Tango Refresher",
+    "category": "Refreshers",
+    "price": 5.25,
+    "description": "Tart passion fruit and tangy citrus.",
+    "available": true
+  },
+  {
+    "id": 24,
+    "name": "Strawberry Banana Smoothie",
+    "category": "Smoothies",
+    "price": 6.0,
+    "description": "Fresh strawberries, banana and creamy yogurt.",
+    "available": true
+  },
+  {
+    "id": 25,
+    "name": "Mango Smoothie",
+    "category": "Smoothies",
+    "price": 6.0,
+    "description": "Tropical mango blended with mango sorbet.",
+    "available": true
+  },
+  {
+    "id": 26,
+    "name": "Green Detox Smoothie",
+    "category": "Smoothies",
+    "price": 6.5,
+    "description": "Spinach, kale, pineapple and ginger.",
+    "available": true
+  },
+  {
+    "id": 27,
+    "name": "Double Chocolate Brownie",
+    "category": "Desserts",
+    "price": 3.5,
+    "description": "Fudgy brownie studded with chocolate chunks.",
+    "available": true
+  },
+  {
+    "id": 28,
+    "name": "New York Cheesecake",
+    "category": "Desserts",
+    "price": 4.5,
+    "description": "Creamy cheesecake on a buttery graham crust.",
+    "available": true
+  },
+  {
+    "id": 29,
+    "name": "Butter Croissant",
+    "category": "Desserts",
+    "price": 3.0,
+    "description": "Flaky, buttery French-style croissant.",
+    "available": true
+  },
+  {
+    "id": 30,
+    "name": "Blueberry Muffin",
+    "category": "Desserts",
+    "price": 3.25,
+    "description": "Bakery-fresh muffin bursting with blueberries.",
+    "available": false
+  },
+  {
+    "id": 31,
+    "name": "Turkey & Swiss Sandwich",
+    "category": "Sandwiches",
+    "price": 8.5,
+    "description": "Roasted turkey, swiss, lettuce and tomato on sourdough.",
+    "available": true
+  },
+  {
+    "id": 32,
+    "name": "Chicken Pesto Sandwich",
+    "category": "Sandwiches",
+    "price": 8.75,
+    "description": "Grilled chicken, basil pesto and mozzarella on ciabatta.",
+    "available": true
+  },
+  {
+    "id": 33,
+    "name": "Caprese Sandwich",
+    "category": "Sandwiches",
+    "price": 8.25,
+    "description": "Fresh mozzarella, tomato, basil and balsamic glaze.",
+    "available": true
+  },
+  {
+    "id": 34,
+    "name": "Veggie Delight Sandwich",
+    "category": "Sandwiches",
+    "price": 7.75,
+    "description": "Roasted veggies, hummus and greens on multigrain.",
+    "available": true
+  },
+  {
+    "id": 35,
+    "name": "Margherita Pizza",
+    "category": "Pizza",
+    "price": 9.5,
+    "description": "San Marzano tomatoes, fresh mozzarella and basil.",
+    "available": true
+  },
+  {
+    "id": 36,
+    "name": "Pepperoni Pizza",
+    "category": "Pizza",
+    "price": 10.75,
+    "description": "Pepperoni, mozzarella and tomato sauce.",
+    "available": false
+  },
+  {
+    "id": 37,
+    "name": "Veggie Supreme Pizza",
+    "category": "Pizza",
+    "price": 10.25,
+    "description": "Peppers, onions, mushrooms, olives and mozzarella.",
+    "available": true
+  },
+  {
+    "id": 38,
+    "name": "Classic Cheeseburger",
+    "category": "Burgers",
+    "price": 10.25,
+    "description": "Angus beef patty, cheddar, lettuce, tomato and house sauce.",
+    "available": true
+  },
+  {
+    "id": 39,
+    "name": "Bacon BBQ Burger",
+    "category": "Burgers",
+    "price": 11.5,
+    "description": "Smoky bacon, BBQ glaze and crispy onions.",
+    "available": true
+  },
+  {
+    "id": 40,
+    "name": "Veggie Burger",
+    "category": "Burgers",
+    "price": 9.75,
+    "description": "Plant-based patty with avocado and sprouts.",
+    "available": true
+  },
+  {
+    "id": 41,
+    "name": "Chicken Alfredo Pasta",
+    "category": "Pasta",
+    "price": 11.5,
+    "description": "Fettuccine in a creamy parmesan sauce with grilled chicken.",
+    "available": true
+  },
+  {
+    "id": 42,
+    "name": "Spaghetti Bolognese",
+    "category": "Pasta",
+    "price": 10.5,
+    "description": "Slow-cooked beef ragout over spaghetti.",
+    "available": true
+  },
+  {
+    "id": 43,
+    "name": "Pesto Penne",
+    "category": "Pasta",
+    "price": 9.75,
+    "description": "Penne tossed in basil pesto with cherry tomatoes.",
+    "available": true
+  },
+  {
+    "id": 44,
+    "name": "Buttermilk Pancakes",
+    "category": "Breakfast",
+    "price": 7.5,
+    "description": "Fluffy stack with maple syrup and whipped butter.",
+    "available": true
+  },
+  {
+    "id": 45,
+    "name": "Avocado Toast",
+    "category": "Breakfast",
+    "price": 6.5,
+    "description": "Smashed avocado, chili flakes and lemon on sourdough.",
+    "available": true
+  },
+  {
+    "id": 46,
+    "name": "Egg & Bacon Bagel",
+    "category": "Breakfast",
+    "price": 6.75,
+    "description": "Fried egg, crispy bacon and cheddar on a toasted bagel.",
+    "available": true
+  }
+]

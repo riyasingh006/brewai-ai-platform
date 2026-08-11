@@ -1,0 +1,17 @@
+# Backend API for the Coffee Shop AI Agent web app.
+# Core AI dependencies (google-genai, python-dotenv, pydantic) live in the
+# project requirements.txt and are shared with the CLI.
+
+fastapi==0.141.1
+uvicorn[standard]==0.51.0
+prisma==0.15.0
+pydantic==2.13.4
+python-dotenv==1.2.2
+httpx==0.28.1
+PyJWT==2.10.1
+cryptography==45.0.5
+slowapi==0.1.9
+reportlab==4.4.1
+qrcode==8.2
+pillow==11.2.1
+email-validator==2.2.0
