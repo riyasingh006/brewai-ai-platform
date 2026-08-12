@@ -4,3 +4,9 @@ __pycache__/
 .env.local
 .pytest_cache
 chroma_db
+
+# generated artifacts (already tracked files remain; new ones are ignored)
+backend.log
+backend/prisma/*.db
+backend/prisma/*.db-journal
+backend/receipts/

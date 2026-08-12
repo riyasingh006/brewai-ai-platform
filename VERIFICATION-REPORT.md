@@ -1,98 +1,154 @@
-# BrewAI — Premium Role-Based Auth Gateway — Verification Report
+# BrewAI — Full-Stack Verification & Production-Readiness Report
 
-Date: 2026-08-09
-Scope: Landing → `/auth` role gateway → role-specific login/registration, backend `ADMIN_SECRET_KEY`
-enforcement, preserved customer/admin dashboard separation, 12 security tests end-to-end in a real
-browser (headless Chrome via CDP) plus direct API checks.
+Date: 2026-08-12
+Scope: End-to-end audit of the BrewAI web app — Next.js 16 frontend (`frontend/`), FastAPI backend
+(`backend/`), shared Gemini AI core (`app/`), Prisma/SQLite database, auth, payments, env/config
+security, and git hygiene. All tests were executed against the live servers
+(backend `http://localhost:8000`, frontend `http://localhost:3000`).
 
-## What was implemented
+## 1. Build & Type-Check Status
 
-- `frontend/app/auth/page.tsx` — new premium dark `/auth` role gateway:
-  - Step 1 "How would you like to continue?" with **Customer** (☕) and **Admin** (🛡) cards.
-  - Customer card → sign-in / create-account form (login + register).
-  - Admin card → sign-in / create-admin form, always requiring the **Admin Key** (server-verified).
-  - "Change role" back navigation, `?next=` support (open-redirect guarded), auto-redirect when a
-    session already exists.
-- Landing header: removed the separate **Sign In** button — single **Get Started** → `/auth`
-  (signed-in users go straight to their role home). Hero/About/Nearby CTAs now route signed-out users
-  to `/auth` (Nearby passes `?next=/nearby-cafes`). Removed the now-dead in-page sign-in overlay wiring.
-- Backend: `/api/auth/admin/login` now **requires the admin key** (compared against `ADMIN_SECRET_KEY`
-  via constant-time `hmac.compare_digest`); `/api/auth/login` **rejects admin accounts** (403) so admin
-  sessions can only be issued through the admin endpoint.
-- `frontend/lib/api.ts` `adminLogin(email, password, adminKey)`; `lib/dev-auth.tsx` updated; existing
-  `/admin/login` page gained an "Admin Sign-in Key" field (still works with the proxy `?next=` flow).
+- `npx tsc --noEmit` — PASS (exit 0, no errors).
+- `npm run lint` — PASS (0 errors; 1 pre-existing `<img>` warning in `components/nearby-cafes/CafeDetails.tsx:119`).
+- `npm run build` (Next.js 16.3.0, Turbopack) — PASS (lint + TypeScript + build clean).
+  Routes: `/`, `/login`, `/auth`, `/nearby-cafes`, `/admin/login`, `/admin/register` (static),
+  `/[[...path]]` (dynamic SPA), plus `ƒ Proxy (Middleware)` (admin gate in `frontend/proxy.ts`).
+- Backend import check — PASS (all routers, services, and `app/` AI modules import; `create_app()` runs).
 
-## AUTHENTICATION
+## 2. Runtime / Server Status
 
-- [x] Landing page shows only **Get Started** (no "Sign In" button) — browser-verified.
-- [x] Get Started → `/auth` role-selection gateway — browser-verified.
-- [x] Gateway shows Customer + Admin role cards — browser-verified.
-- [x] Customer card → form → real login → `/dashboard` (Welcome back, TOTAL SPEND, FAVORITE DRINK,
-      Loyalty Rewards, Recent Orders) — browser-verified.
-- [x] Customer registration always creates `role: customer` (even with `"role":"admin"` in the body) —
-      API-verified (201, role=customer).
-- [x] Admin login requires email + password + **Admin Key**:
-      wrong key → `401 Invalid admin sign-in key.`; missing key → `422`; correct key → `200`, role=admin.
-- [x] Admin card → form → real login → `/admin/dashboard` (Overview, TOTAL REVENUE, Revenue Overview,
-      Orders by Time, Admin workspace, Recent Orders, Logout) — browser-verified.
-- [x] Wrong admin key shown inline on `/auth`; user stays on `/auth`, no session issued — browser-verified.
-- [x] `/admin/login` (proxy redirect target) still works: redirected there from `/admin/dashboard`,
-      fills email/password/key, lands on `/admin/dashboard` honoring `next` — browser-verified.
-- [x] Logout clears token/cookie → returns to landing — browser-verified.
+- Backend `uvicorn backend.main:app` on `127.0.0.1:8000` — healthy (`/api/health` → 200,
+  `{"status":"ok","provider":"sandbox","env":"development"}`), startup logs clean, admin bootstrap ran
+  (`admin@coffeeshop.local` already admin).
+- Frontend `next dev` on `localhost:3000` — up, serves `/login` 200, proxy active.
+- **FIX (blocker):** The backend processes running before this audit were started 2026-08-09 — BEFORE the
+  recent key/secret rotation — so they held the OLD secrets in memory (fresh `.env` values were rejected:
+  `401 Invalid admin sign-in key.`). Both stale processes were stopped and the backend restarted with the
+  current `.env`. The duplicate-process situation (two uvicorn PIDs on :8000) is resolved — one backend now.
 
-## AUTHORIZATION
+## 3. Functional API Verification (all PASS)
 
-- [x] Customer session calling `/api/admin/summary` → `403 Administrator access required.`
-- [x] No credentials → `401 Missing authentication credentials.`
-- [x] Customer login endpoint with admin credentials → `403 This is an administrator account.
-      Sign in through the Admin gateway.` (admins cannot get customer-scoped sessions).
-- [x] `role: "admin"` in register body is ignored (server forces customer).
-- [x] Forged `brewai.session` cookie → proxy `307` redirect to `/admin/login?next=...` (JWT signature
-      rejected). Real admin token cookie → `200`.
-- [x] Client-side role spoofing (localStorage) cannot grant admin: server loads role from the DB on
-      every request (`backend/core/deps.py`).
-- [x] Customer browsing `/admin/dashboard` → redirected to `/dashboard` — browser-verified.
+| Check | Result |
+|---|---|
+| Customer register (`/api/auth/register`) | 201, role forced to `customer` |
+| Customer login → `/api/me` | 200 |
+| `/api/menu` | 200, 46 menu items, full catalog |
+| Add to cart / view cart | 200 (line + qty + unit price correct) |
+| Checkout `/api/orders` | 200, order created `CS-…`, total includes tax |
+| Charge `/api/payments/charge` (sandbox, UPI) | 200, `status: paid` |
+| Order after charge | 200, `status: confirmed`, `paymentStatus: paid` |
+| `/api/orders` list + `/api/orders/{id}` | 200 |
+| `/api/menu/recommendations` | 200 |
+| Receipt PDF generation + `/api/receipts/{file}` | 200 (generated during checkout) |
 
-## ROUTING
+Test data created for verification was fully removed from `backend/prisma/dev.db` afterwards.
 
-- [x] `/auth` renders the gateway (static route, 200).
-- [x] Customer login → `/dashboard`; admin login → `/admin/dashboard`.
-- [x] `/auth` honors `?next=` (open-redirect guarded: only same-origin `/`-prefixed paths).
-- [x] Already-signed-in visitors to `/auth` → redirected to role home.
-- [x] Signed-out visitors to app routes → landing `/`.
-- [x] Existing `AdminView` vs `CustomerDashboard` split preserved (no cross-imports; role-dispatched).
+## 4. Authentication & Authorization
 
-## UI
+- **Session JWT (HS256)** signed with backend `AUTH_SECRET`, verified by the frontend proxy with the
+  same secret; role always resolved from the database (`backend/core/deps.py`) — client-side role
+  tampering cannot escalate.
+- **Admin key** checked with constant-time `hmac.compare_digest` against `ADMIN_SECRET_KEY`.
+- **BUG FOUND & FIXED (blocker):** `frontend/.env.local` `AUTH_SECRET` did NOT match the backend
+  `.env` value (`dev-auth-secret-change-me-…`). Any `brewai.session` cookie signed by the backend failed
+  verification in `frontend/proxy.ts` → admin would loop-redirect to `/admin/login`. Fix: synced
+  `frontend/.env.local` `AUTH_SECRET` to the backend value (verified by PyJWT cross-verify, then live:).
 
-- [x] Premium dark gateway matching the BrewAI theme (reuses `AuthShell`/`AuthCard`/`TextField`/
-      `PasswordField`; new `contentWidth="lg"` option for the two-card layout).
-- [x] Role cards with icon, description, feature bullets, CTA.
-- [x] Per-role sign-in/create-account toggles with client-side validation (email format, password ≥ 8,
-      confirm match, admin key required).
-- [x] Inline error states + submit spinners; "Change role" back support.
-- [x] Dashboard separation confirmed in the browser (customer UI has no admin markers and vice-versa).
+| Test (live, through the real proxy) | Result |
+|---|---|
+| Admin-signed JWT cookie → `/admin/dashboard` | 200 (page renders) |
+| Customer-role JWT cookie → `/admin/dashboard` | redirected to `/dashboard` |
+| Forged-signature cookie → `/admin/dashboard` | redirected to `/admin/login?next=…` |
+| Admin Bearer token → `/api/me`, `/api/admin/summary` | 200 |
+| Customer Bearer token → `/api/admin/summary` | 403 |
+| No credentials → protected APIs | 401 |
 
-## BUILD
+- **FINDING (login blocker — not auto-fixed):** no admin account in `dev.db` currently matches the
+  current `ADMIN_DEV_PASSWORD` (stored `password_hash` predates the credential rotation; the bootstrap
+  only sets the dev password when promoting a user, not for an existing admin). Admin key + JWT flows
+  work, but the documented dev credentials cannot sign in. See §10 for options — nothing was reset to
+  avoid changing existing passwords.
+- **FINDING (by design):** the `x-dev-user` identity header is DISABLED because `AUTH_SECRET` is set
+  (`backend/core/security.py`) — all requests require a real bearer JWT.
 
-- [x] `npx tsc --noEmit` — exit 0, no errors.
-- [x] `npm run lint` — 0 errors (1 pre-existing `<img>` warning in `nearby-cafes/CafeDetails.tsx`).
-- [x] `npm run build` (Next.js 16.3.0 Turbopack) — compiled, TypeScript passed, all routes generated
-      (`/auth` included).
-- [x] Backend import check — OK; backend restarted on `127.0.0.1:8000`; frontend dev server on `:3000`.
+## 5. AI / Gemini Chat
 
-## Security test matrix (all passed)
+- Live streaming chat test PASS: `POST /api/chat` produced a real Gemini response with `tool` + `assistant`
+  SSE events; a "cold, not-too-sweet" query returned a relevant recommendation (Cold Brew, Green Detox
+  Smoothie, Chai Latte) and invoked the menu tools.
+- `GEMINI_API_KEY` is present and format-validated; `MODEL_NAME=gemini-3.6-flash` with a fallback chain
+  via `GEMINI_MODEL_FALLBACKS`.
 
-| # | Test | Result |
-|---|------|--------|
-| 1 | Customer token → admin API | 403 |
-| 2 | No credentials → admin API | 401 |
-| 3 | Admin login, wrong key | 401, no session |
-| 4 | Admin login, missing key | 422 |
-| 5 | Admin login, correct key + creds | 200, role=admin |
-| 6 | Customer login with admin account | 403 |
-| 7 | `role=admin` in register body | ignored (role=customer) |
-| 8 | Admin register with wrong key | 401 (no account) — pre-existing, unchanged |
-| 9 | Forged session cookie → `/admin/*` | 307 → `/admin/login` |
-| 10 | Customer opens `/admin/dashboard` | redirected to `/dashboard` |
-| 11 | localStorage role tampering | no escalation (DB is source of truth) |
-| 12 | Admin UI ↔ customer UI separation | both verified in real browser |
+## 6. Payments
+
+- `PAYMENT_PROVIDER=sandbox` — end-to-end checkout works without real keys.
+- **FINDING (NEEDS CONFIGURATION for production):** the Stripe/Razorpay path is a reference stub
+  (`StripeLikeProvider` raises `NotImplementedError` until keys are wired) — it deliberately fails
+  closed, so production must either implement a gateway or keep sandbox.
+
+## 7. Security Audit
+
+- Secrets scan of all TRACKED files — NO secrets found (no API keys, tokens, or passwords in git).
+- `.env` and `frontend/.env.local` are gitignored (confirmed); `.env.example` is placeholder-only.
+- No secrets in server logs or the built frontend bundle.
+- CORS — already env-driven: `backend/main.py` uses `settings.cors_origins`, default
+  `["http://localhost:3000"]`, overridable via `CORS_ORIGINS` (comma-separated). No hardcoded origin
+  list found.
+- **FINDING:** two different Google Maps keys exist (root `.env` vs `frontend/.env.local`). The
+  frontend uses its own copy from `frontend/`. Confirm which key is current and keep only one.
+
+## 8. Environment Configuration
+
+- `backend/core/config.py` `Settings` is intact and reads: `APP_ENV`, `DATABASE_URL`, `CORS_ORIGINS`,
+  `FRONTEND_URL`, `CHAT_RATE_LIMIT`, `PAYMENT_PROVIDER`, loyalty/birthday/tax knobs, `ADMIN_EMAIL`,
+  `ADMIN_BOOTSTRAP_SECRET`, `ADMIN_DEV_PASSWORD`, `ADMIN_SECRET_KEY`, `AUTH_SECRET`,
+  `SESSION_TTL_SECONDS`, and optional `CLERK_*` (JWKS-based verification in `core/security.py`).
+- `app/config.py` reads `GEMINI_API_KEY` (also `MODEL_NAME`/`GEMINI_MODEL`), `GEMINI_MODEL_FALLBACKS`,
+  `LOG_LEVEL`.
+- **FIXED:** `.env.example` was incomplete (only 3 of ~20 vars). It now documents every var the code
+  reads with safe placeholders and default values, and notes frontend-only vars for `frontend/.env.local`.
+  No real values are present.
+- `DATABASE_URL`, `CLERK_*`, `PAYMENT_PROVIDER` are not in `.env` — defaults are safe for dev; document
+  in deployment checklist (see §10).
+
+## 9. Data & Git Hygiene
+
+- **FINDING (should fix at next commit):** generated artifacts are tracked in git:
+  - `backend/prisma/dev.db` (contains real customer/admin data — committed to the repo)
+  - `backend.log`
+  - 30 receipt PDFs under `backend/receipts/`
+- **FIXED:** `.gitignore` now covers `backend/prisma/*.db`, `backend/receipts/`, `backend.log` (new
+  files are ignored; already-tracked files remain until untracked).
+- Recommended (needs a commit, so left to you): `git rm --cached backend.log backend/prisma/dev.db
+  backend/receipts/` then commit the removal together with the `.gitignore` update.
+
+## 10. Open Items / Recommendations
+
+1. **Admin login password (blocker for the owner):** no admin account matches the current
+   `ADMIN_DEV_PASSWORD`. Options: (a) log in with the pre-rotation password, (b) reset the dev DB seed,
+   or (c) approve a one-time reset of the `admin@coffeeshop.local` hash to `ADMIN_DEV_PASSWORD` in
+   dev only. Not changed automatically out of respect for your "don't change existing passwords" rule.
+2. **Untrack generated artifacts** (`git rm --cached …`, §9) at the next commit.
+3. **Production env:** set `APP_ENV=production`, `DATABASE_URL`, `CORS_ORIGINS`, `AUTH_SECRET`/
+   `ADMIN_SECRET_KEY`/`ADMIN_DEV_PASSWORD`-equivalent, `PAYMENT_PROVIDER` gateway or keys, and
+   `ADMIN_BOOTSTRAP_SECRET` (required for admin bootstrap in production). Wire `CLERK_*` if using Clerk.
+4. **Single Maps key:** keep one `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` and restrict it to the production
+   domain in Google Cloud Console.
+5. **Tests:** no `test_*.py` files exist. Consider a small pytest suite for auth + order flow to lock in
+   the behavior verified here.
+
+## 11. Files Changed This Audit
+
+- `frontend/.env.local` — synced `AUTH_SECRET` to match backend (gitignored, blocker fix).
+- `.env.example` — completed with all vars + safe placeholders (tracked).
+- `.gitignore` — ignore generated DB/receipts/log (tracked).
+- `backend/prisma/dev.db` — verification test data added and then removed (tracked; see §9).
+- No application code was changed; no secrets were printed, rotated, or committed.
+
+## 12. Conclusion
+
+All core user journeys (auth → menu → cart → checkout → sandbox payment → confirmed order,
+admin role gate, Gemini chat) are verified working against the live stack with the CURRENT config.
+One functional blocker was found and fixed (AUTH_SECRET mismatch), and one owner-action blocker
+remains (admin password mismatch after the credential rotation). The app is in a good state for
+development and ready for the production checklist in §10 before a real deployment.
